@@ -1,7 +1,7 @@
 CONTEST #1
 //////////////////////////////
 
-1095:
+// 1095:  Imprimir un patron numerico
 #include <iostream>
 using namespace std;
 
@@ -13,7 +13,7 @@ int main() {
  return 0;
 }
 ///////////////////////////
-1306
+// 1306: la formula seria CEILING(n/r) - 1
 #include <iostream>
 using namespace std;
 
@@ -36,7 +36,8 @@ int main() {
  return 0;
 }
 /////////////////////
-2140:
+// 2140: Generamos todas las combinaciones y vemos si existe esa
+// diferencia por cada par de valores n y m
 #include <iostream>
 #include <set>
 using namespace std;
@@ -59,7 +60,7 @@ int main() {
  return 0;
 }
 ///////////////////////////
-2161:
+// 2161: Generamos la serie de adentro hacia afuera
 #include <iostream>
 using namespace std;
 
@@ -79,7 +80,7 @@ int main() {
  return 0;
 }
 ///////////////////////////
-3147:
+// 3147:  sumar y comparar
 #include <iostream>
 using namespace std;
 
@@ -92,7 +93,8 @@ int main() {
  return 0;
 }
 ///////////////////////
-3414:
+// 3414: el patron se reduce a hacer dezplamientos de bits
+// y ver el minimo de intentos
 #include <iostream>
 using namespace std;
 int main() {
@@ -144,7 +146,7 @@ int main() {
 CONTEST #2
 //////////////////////////////
 
-2157
+// 2157: generar la serie ascendente y luego descendente
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -170,7 +172,7 @@ int main() {
     return 0;
 }
 ////////////////////////////
-1168
+// 1168: contar por cada digito y sumar
 #include <iostream>
 
 using namespace std;
@@ -190,7 +192,8 @@ int main() {
     return 0;
 }
 /////////////////////////
-2678
+// 2678:por cada caracter ver que numero corresponde y mostrar ese
+// no olvidar las minusculas
 #include <iostream>
 #include <cstring>
 
@@ -223,7 +226,8 @@ int main() {
     return 0;
 }
 /////////////////////////////////////////
-2591
+// 2591: contar la cantidad de a's y luego multiplicar
+// para mostrar esa cantidad de a's
 #include <iostream>
 #include <cstring>
 
@@ -248,7 +252,7 @@ int main() {
     return 0;
 }
 ////////////////////////////////
-2137
+// 2137: ordenar las cadenas
 #include <iostream>
 #include <algorithm>
 
@@ -271,7 +275,7 @@ int main() {
     return 0;
 }
 ///////////////////////////////
-1278
+// 1278 procesar los tokens y justificar al mayor string
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -318,6 +322,147 @@ int main() {
           putchar(10);
       }
       nc++;
+    }
+    return 0;
+}
+
+//////////////////////
+CONTEST #3
+// 1240: ver si B es sufijo de An
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    char a[12];
+    char b[12];
+    string A,B;
+    scanf("%d", &n);
+    while(n--) {
+        scanf("%s %s", a, b);
+        A = a;
+        B = b;
+        if(B.size() > A.size()) puts("nao encaixa");
+        else {
+            bool ok = 1;
+            for(int i=B.size()-1, j=A.size() - 1; i >= 0; --i, j--) {
+                if(A[j] != B[i])
+                    ok = 0;
+            }
+            puts(ok ? "encaixa" : "nao encaixa");                
+        }
+    }
+    return 0;
+}
+//////////////////////////
+// 1555: calcular el valor de las formulas y ver es el mayor
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, x, y, res, carlos, beto, rafael;
+    scanf("%d", &n);
+    while(n--) {
+        scanf("%d %d", &x, &y);
+        rafael = (3*x)*(3*x) + y*y;
+        beto = 2*x*x+(5*y)*(5*y);
+        carlos = -100*x+y*y*y;
+        res = max(max(rafael, beto), carlos);
+        if(res == rafael)
+            puts("Rafael ganhou");
+        if(res == beto)
+            puts("Beto ganhou");
+        if(res == carlos)
+            puts("Carlos ganhou");
+    }
+    return 0;
+}
+///////////////////////////////////////
+// 3312 si el numero es primo, hallar su factorial
+def prime(n):
+    if n < 2:
+        return False;
+    for d in range(2,n):
+        if n % d == 0:
+            return False
+    return True
+f = []
+esprimo = []
+f.append(1)
+esprimo.append(False)
+for i in range(100):
+    f.append(f[i] * (i+1))
+    esprimo.append(prime(i+1))
+n = int(input())
+a = list(map(int, input().split()))
+for v in a:
+    if(esprimo[v]):
+        print(str(v) +"! = "+str(f[v]))
+///////////////////////////
+// 2044: contar las veces que la suma acumulada es multiplo de 100
+#include <iostream>
+using namespace std;
+ 
+int main() {
+    int n, s, v, c;
+    while(1) {
+        scanf("%d", &n);
+        if(n == -1) break;
+        s = 0;
+        c = 0;
+        for(int i = 0; i < n; ++i) {
+            scanf("%d", &v);
+            s = (s + v) % 100;
+            c += s==0;
+        }
+        printf("%d\n",c);
+    }
+    return 0;
+}
+///////////////////////////////////
+// 2180 sumar los siguientes 10 numeros primos desde el valor ingresado 
+#include <iostream>
+using namespace std;
+int p[70001];
+int d[70001];
+
+int main() {
+    int n = 60250; 
+    for(int i=4;i<=n; i+= 2)
+        p[i] = 1;
+    for(int i=3;i<=n; i+= 2)
+        if(p[i] == 0)
+            for(int j = i + i;j <=n; j += i)
+                p[j] = 1;
+    int c = 0;
+    for(int i=2;i<=n;++i)
+        if(p[i] == 0)
+           d[c++] = i;
+    int v;
+    scanf("%d", &v);
+    int p = lower_bound(d, d + c, v) - d;
+    int s = 0;
+    for(int i=0;i<10;++i)
+        s+= d[i+p];
+    int h = 60000000 / s;
+    printf("%d km/h\n%d h / %d d\n", s, h , h / 24);
+    return 0;
+}
+////////////////////////////
+// 2489 si el angulo es agudo, restar D/tg(angulo). Sino, sumar 
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double r, A, D, alfa;
+    double pi = acos(-1);
+    while(cin >> A >> D >> alfa) {
+        if(alfa < 90)
+            r = A - D / tan(alfa*pi/180);
+        else 
+            r = A + D / tan((180-alfa)*pi/180);
+        printf("%.4f\n", r);
     }
     return 0;
 }
