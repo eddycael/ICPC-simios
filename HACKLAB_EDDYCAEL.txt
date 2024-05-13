@@ -799,49 +799,41 @@ int main() {
 using namespace std;
 
 int main() {
-    int a[1000][1000];
-    vector<int> pilas[1000];
-    int n, m, k, v, I, J;
-    while (1) {
-        scanf("%d %d %d", &n,&m,&k);
-        if (!(n+m+k)) 
-            break;
-        
-        for (int i = 0 ; i < n; ++i)
-            for (int j = 0 ; j < m; ++j)
-                scanf("%d", &a[i][j]);
-        for (int j = 0 ; j < m; ++j) {
-            pilas[j].clear();
-            for (int i = n-1 ; i >=0; --i)
-                    pilas[j].push_back(a[i][j]);
-        }
-        
-        int J = m-1;
-        
-        while(k-- && J >= 0) {
-            scanf("%d", &v);
-            int p = find(pilas[J].begin(),pilas[J].end(),0) - pilas[J].begin();
-            if(p < n )
-                pilas[J][p] = v;
-            else {
-                while(J >= 0 && p == n) {
-                    J--;
-                    if(J >= 0)
-                       p = find(pilas[J].begin(),pilas[J].end(),0) - pilas[J].begin();
-                } 
-                if(J >= 0 && p < n)
-                    pilas[J][p] = v;
-                
-            }
-        }
-        for(int i=0;i<n;++i) {
-            for(int j=0;j<m;++j) {
-                if(j) putchar(32);
-                printf("%d",pilas[j][n-i-1]);
-            }
-            putchar(10);
-        }
-    }
-    
+	int a[1000][1000];
+	int px[1000000];
+	int py[1000000];
+	int n, m, k, v, cur, sz;
+	while (1) {
+		scanf("%d %d %d", &n,&m,&k);
+		if (!(n+m+k)) 
+			break;
+		
+		for (int i = 0 ; i < n; ++i)
+			for (int j = 0 ; j < m; ++j)
+				scanf("%d", &a[i][j]);
+		sz = 0;
+		for (int j = m-1; j >= 0; --j)
+			for (int i = n-1 ; i >=0; --i)
+				if(!a[i][j]) {
+					px[sz] = i;
+					py[sz] = j;
+					sz++;
+				}
+		cur = 0;
+		while(k--) {
+			scanf("%d", &v);
+			if(cur < sz) {
+				a[px[cur]][py[cur]] = v;
+				cur++;
+			}
+		}
+		for(int i=0;i<n;++i) {
+			for(int j=0;j<m;++j) {
+				if(j) putchar(32);
+				printf("%d",a[i][j]);
+			}
+			putchar(10);
+		}
+	}
+	
 }
-
