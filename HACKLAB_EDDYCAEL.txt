@@ -466,3 +466,382 @@ int main() {
     }
     return 0;
 }
+
+// CONTEST #4
+// 1103
+#include <iostream>
+using namespace std;
+ 
+int main() {
+    int h1, m1, h2, m2, t1,t2;
+    while(1) {
+        scanf("%d %d %d %d", &h1, &m1, &h2, &m2);
+        if(!(h1+m1+h2+m2)) break;
+        t1 = h1 * 60 + m1;
+        t2 = h2 * 60 + m2;
+        if(t1 > t2)
+            t2 += 24 * 60;
+        printf("%d\n", t2 - t1);
+    }
+    return 0;
+}
+
+//////////////////////
+// 3126
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, s, v;
+    scanf("%d", &n);
+    s = 0;
+    for(int i = 0; i < n; ++i) { 
+        scanf("%d", &v);
+        s += v;
+    }
+    printf("%d\n",s);
+    return 0;
+}
+
+///////////////////////
+// 2457
+
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int main() {
+    int cp, cok;
+    string cad, p;
+    getline(cin, cad);
+    getline(cin, p);
+    stringstream ss;
+    ss << p;
+    cok = 0;
+    cp = 0;
+    while(ss >> p) {
+        if(p.find(cad[0]) != string::npos)
+            cok ++;
+        cp++;   
+    }
+    printf("%.1f\n", 100.0 * cok / cp );
+    return 0;
+}
+
+///////////////////
+// 1546
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int main() {
+    int n, k, p;
+    string names[] = {"","Rolien", "Naej", "Elehcim", "Odranoel"};
+    scanf("%d", &n);
+    while(n--) {
+        scanf("%d", &k);
+        while(k--) {
+            scanf("%d", &p);
+            printf("%s\n", names[p].c_str());
+        }   
+    }
+    return 0;
+}
+
+///////////////////
+// 2417 
+#include <iostream>
+using namespace std;
+
+int main() {
+    int va, ea, ga;
+    int vb, eb, gb;
+    int pa, pb;
+    scanf("%d %d %d %d %d %d", &va, &ea, &ga, &vb, &eb, &gb);
+    pa = va * 3 + ea;
+    pb = vb * 3 + eb;
+    if(pa > pb) puts("C");
+    else if(pa < pb) puts("F");
+    else {
+        if(ga > gb) puts("C");
+        else if(ga < gb) puts("F");
+        else puts("=");
+    }
+    return 0;
+}
+
+//////////////////////
+// 1793
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, a, tt, lb, open; 
+    while(1) {
+        scanf("%d", &n);
+        if(!n) break;
+        lb = 0;
+        tt = 0;
+        for(int i = 0; i < n; ++i) {
+            scanf("%d", &a);
+            if(a > lb)
+                tt += 10;
+            else tt += a + 10 - lb;
+            lb = a + 10;
+        }
+        printf("%d\n", tt);
+    }
+    
+    return 0;
+}
+/////
+
+
+// CONTEST #5
+// 3171
+#include <iostream>
+using namespace std;
+int p[101];
+int find(int x) {
+    if(p[x] == x) return x;
+    return p[x] = find(p[x]);
+}
+int main() {
+    // your code goes here
+    int n, m, a, b, c;
+    scanf("%d %d", &n, &m);
+    for(int i = 1;i <= n; ++i)
+        p[i] = i;
+    c = n;
+    while(m--) {
+        scanf("%d %d", &a, &b);
+        a = find(a);
+        b = find(b);
+        if(a != b)
+            p[a] = b, n--;
+    }
+    puts(n == 1 ? "COMPLETO" : "INCOMPLETO");
+    return 0;
+}
+
+////////////////
+// 3160
+
+#include <iostream>
+#include <sstream>
+#include <vector>
+using namespace std;
+
+int main() {
+    string str;
+    vector<string> a, b;
+    getline(cin, str);
+    {
+    stringstream ss(str);
+    while(ss >> str) 
+        a.push_back(str);
+    }
+    getline(cin, str);
+    
+    {
+    stringstream ss(str);
+    while(ss >> str) 
+        b.push_back(str);
+    }
+    getline(cin, str);
+    int c, pos;
+    if(str != "nao") {  
+        pos = 0;
+        c = 0;
+        while(pos < a.size() && a[pos] != str) {
+            if(c) putchar(32);
+            printf("%s", a[pos].c_str());
+            c++;
+            pos++;
+        }
+        for(int i=0;i<b.size();++i) {
+            if(c) putchar(32);
+            printf("%s", b[i].c_str());
+            c++;
+        }
+        while(pos < a.size()) {
+            if(c) putchar(32);
+            printf("%s", a[pos].c_str());
+            c++;
+            pos++;
+        }
+    }
+    else {
+        c = 0;
+        for(int i = 0; i < a.size(); ++i) {
+            if(c) putchar(32);
+            printf("%s", a[i].c_str());
+            c++;
+        }
+        for(int i = 0; i < b.size(); ++i) {
+            if(c) putchar(32);
+            printf("%s", b[i].c_str());
+            c++;
+        }
+    }
+    putchar(10);
+    return 0;
+}
+
+//////////////////
+// 3357
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, l, q, a, b;
+    scanf("%d", &n);
+    scanf("%d.%d", &a, &b);
+    l = a * 10 + b;
+    scanf("%d.%d", &a, &b);
+    q = a * 10 + b;
+    int pos = 0;
+    while(l >= q) {
+        l -= q;
+        if(l > 0)
+        pos= (pos+1) % n; 
+    }
+    if(l == 0)
+        a = q;
+    else a = l; 
+    char nom[15];
+    for(int i=0;i<n;++i) {
+        scanf("%s", nom);
+        if(i == pos)
+            printf("%s %d.%d\n", nom, a/10, a%10);
+    }
+    return 0;
+}
+/////////////////////////
+// 1258
+#include <iostream>
+#include <algorithm>
+#include <sstream>
+using namespace std;
+
+pair<string, pair<int,string> >  a[60];
+int main() {
+    string cad;
+    int n;
+    int nc = 0;
+    while(1) {
+        getline(cin, cad);
+        {
+        stringstream ss(cad);
+        ss >> n;
+        }
+        if(!n) break;
+        if(nc) cout << endl;
+        nc++;
+        for(int i=0;i<n;++i) {
+            getline(cin, cad);
+            a[i].second.second = cad;
+            getline(cin, cad);
+            
+            {
+            stringstream ss(cad);
+            ss >> a[i].first;
+            ss >> cad;
+            if(cad == "P")
+                a[i].second.first = 0;
+            if(cad == "M")
+                a[i].second.first = 1;
+            if(cad == "G")
+                a[i].second.first = 2;
+            }
+        }
+        sort(a,a+n);
+        for(int i = 0; i <n; ++i) {
+            cout << a[i].first << " " << "PMG"[a[i].second.first] 
+            << " " << a[i].second.second << endl;
+        }
+    }
+    return 0;
+}
+////////////////
+// 1110
+#include <iostream>
+using namespace std;
+int a[400];
+
+int main() {
+    int n, f, b, c;
+    while(1) {
+        scanf("%d", &n);
+        if(!n) break;
+        f = b = 0;
+        for(int i = 1; i <= n; i++) 
+            a[b++] = i;
+        printf("Discarded cards:");
+        c = 0;
+        while(b - f > 1) {
+            if(c++) putchar(',');
+            printf(" %d", a[f++]);
+            a[b++] = a[f++];
+        }
+        printf("\nRemaining card: %d\n", a[f]);
+        
+    }
+    return 0;
+}
+
+///////////////////
+// 1874
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main() {
+    int a[1000][1000];
+    vector<int> pilas[1000];
+    int n, m, k, v, I, J;
+    while (1) {
+        scanf("%d %d %d", &n,&m,&k);
+        if (!(n+m+k)) 
+            break;
+        
+        for (int i = 0 ; i < n; ++i)
+            for (int j = 0 ; j < m; ++j)
+                scanf("%d", &a[i][j]);
+        for (int j = 0 ; j < m; ++j) {
+            pilas[j].clear();
+            for (int i = n-1 ; i >=0; --i)
+                    pilas[j].push_back(a[i][j]);
+        }
+        
+        int J = m-1;
+        
+        while(k-- && J >= 0) {
+            scanf("%d", &v);
+            int p = find(pilas[J].begin(),pilas[J].end(),0) - pilas[J].begin();
+            if(p < n )
+                pilas[J][p] = v;
+            else {
+                while(J >= 0 && p == n) {
+                    J--;
+                    if(J >= 0)
+                       p = find(pilas[J].begin(),pilas[J].end(),0) - pilas[J].begin();
+                } 
+                if(J >= 0 && p < n)
+                    pilas[J][p] = v;
+                
+            }
+        }
+        for(int i=0;i<n;++i) {
+            for(int j=0;j<m;++j) {
+                if(j) putchar(32);
+                printf("%d",pilas[j][n-i-1]);
+            }
+            putchar(10);
+        }
+    }
+    
+}
+
