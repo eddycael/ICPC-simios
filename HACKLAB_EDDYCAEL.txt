@@ -798,10 +798,10 @@ int main() {
 #include <vector>
 using namespace std;
 
+int a[1000][1000];
+int px[1000000];
+int py[1000000];
 int main() {
-	int a[1000][1000];
-	int px[1000000];
-	int py[1000000];
 	int n, m, k, v, cur, sz;
 	while (1) {
 		scanf("%d %d %d", &n,&m,&k);
